@@ -10,7 +10,7 @@ function App() {
 
   
     useEffect ( () => {
-      axios.get(`http://api.salic.cultura.gov.br/v1/projetos/?limit=${all}&format=json`)
+      axios.get(`http://api.salic.cultura.gov.br/v1/projetos/?limit=100&format=json`)
       .then((e) => {
 
         for (let i = 0; i < all; i++){
