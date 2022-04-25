@@ -6,24 +6,26 @@ import {AiOutlineHeart} from 'react-icons/ai';
 import { Three } from './Projects.action';
 
 function Projects (props){
-    let data = props.data;
 
+    function AddStorage (){
+
+    }
 
     return (
         <BodyProjects>
             <SectionProjects >
                 {props.data ?                
-               Three(props.data, props.all).map((e, index)=>(
+                Three(props.data, props.all).map((e, index)=>(
                         <DivSect key={index}>
                             <h2 id='title'>ROUANET</h2>
                             <h2 id='name'> {e.nome} </h2>
                             <p id='city'> {e.municipio}, {e.UF}</p>
-                            <p id='resum'> {e.resumo} </p>
+                            <p id='resum'> {e.resumo} </p> 
                             <p id='okay'>APROVADO: <strong>{e.valor_aprovado}</strong></p>
-                            <p id='captade'>CAPTADO: <strong>{e.valor_captado}</strong></p>
+                            <p id='captade'>CAPTADO: <strong>{e.valor_captado}</strong></p>                           
                             <div>
-                                <ButtonStorage favorito={e.favorito} > ADICIONAR </ButtonStorage>
-                                <AiOutlineHeart id='icon' favorito={e.favorito} />
+                                <ButtonStorage favorito={e.favorito} > ADICIONAR  </ButtonStorage>
+                                <AiOutlineHeart id='icon' favorito={e.favorito} />    
                             </div>
                         </DivSect>                       
                 )) : <div> Carregando ... </div>}
@@ -87,7 +89,11 @@ margin-top: 70px;
     }
 
     #icon {
+        top: -3px;
         font-size: 25px;
+        position: relative;
+        right: -3px;
+        color: #80808080;
     }
 
 
@@ -98,10 +104,11 @@ margin-top: 70px;
 `
 
 const ButtonStorage = styled.button`
-background: ${props => props.favorito === true ? 'red' : 'white'}
-font-size: 19px;
+background: ${props => props.favorito === true ? 'red' : 'white'};
+font-size: 22px;
 border: white;
 width: 260px;
 padding: 15px;
+color: #80808080;
 cursor: pointer;
 `
