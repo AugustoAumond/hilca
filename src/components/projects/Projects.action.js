@@ -26,7 +26,6 @@ export function Three (data, all){
         for (let i = ctr - 3; i < ctr; i++){
             list.push(data[i]);
         }
-        console.log(list)
         return list;
     }
 

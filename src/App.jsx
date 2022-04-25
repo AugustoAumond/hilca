@@ -10,12 +10,13 @@ function App() {
   const [all, setAll] = useState(3);
 
   
-    useEffect ( () => {
+    useEffect (() => {
       axios.get(`http://api.salic.cultura.gov.br/v1/projetos/?limit=100&format=json`)
       .then((e) => {
 
-        for (let i = 0; i < all; i++){
+        for (let i = 0; i < 100; i++){
           e.data._embedded.projetos[i].favorito = false;
+          e.data._embedded.projetos[i].id = i;
         }
 
         setData(e.data._embedded.projetos); 
@@ -24,7 +25,7 @@ function App() {
       .catch((e) => {
           setData([])
       })
-    }, [data, all])
+    }, [])
 
     function FuncAll(){
       if (all === 100){
@@ -45,7 +46,7 @@ function App() {
 
       <Projects data={data} all={all}/>  
 
-      <Circle onClick={(()=>MoreThree())}>
+      <Circle id='circle' onClick={(()=>MoreThree())}>
         <MdKeyboardArrowRight id="arrow" onClick={(()=>MoreThree())}/>
       </Circle> 
 
@@ -66,19 +67,6 @@ margin: 100px auto;
   h1 {
     color: #1A838E;
     margin: 35px;
-  }
-
-  #arrow{
-    position: absolute;
-    right: 5px;
-    top: 524px;
-    font-size: 25px;
-    color: #000000d4;
-    cursor: pointer;
-  }
-
-  #arrow: hover {
-    color: #C69949;
   }
 
   #divbutton {
@@ -104,25 +92,34 @@ margin: 100px auto;
       height: 35px;
       margin-top: auto;
     }
-  }   
+  } 
+  
+  #circle: hover {
+    color: gray;
+  }
+
 `
 
 const Circle = styled.div`
-width: 30px;
+width: 40px;
 position: absolute;
-right: 80px;
-height: 30px;
+right: 40px;
+height: 40px;
 top: 475px;
 border: solid #80808087;
 border-radius: 80px;
 
-
   #arrow {
     position: relative;
-    top: -11px;
-    right: 10px;
+    top: -6px;
+    right: 3px;
     font-size: 50px;
     color: #80808087;
+    cursor: pointer;
+  }
+
+  #arrow: hover {
+    color: gray;
   }
 
 `

@@ -1,33 +1,57 @@
-import { useState } from 'react';
-
 import styled from 'styled-components';
 
 import {AiOutlineHeart} from 'react-icons/ai';
 import { Three } from './Projects.action';
 
 function Projects (props){
+    let data = props.data;
 
-    function AddStorage (){
+    function AddFavorits (value, index){
+        let favorits = JSON.parse(localStorage.getItem('favorits'));
+        console.log(data)
+        console.log(favorits, value);
 
+        if (favorits === null){
+            favorits = value;
+            favorits.favorito = true;
+            data[value.id].favorito = true;
+            localStorage.setItem('favorits', JSON.stringify([favorits])); 
+        } else {
+            if (value.favorito === true){ 
+                for (let i = 0; i < favorits.length; i++){
+                    if (value.nome.indexOf(favorits[i].nome) > -1){
+                        favorits.splice(i, 1);
+                        data[value.id].favorito = false;
+                        localStorage.setItem('favorits', JSON.stringify(favorits));  
+                    }
+                }               
+            } else {
+                value.favorito = true;
+                favorits.push(value);
+                data[value.id].favorito = true;
+                localStorage.setItem('favorits', JSON.stringify(favorits)); 
+                
+            }
+        }
     }
 
     return (
         <BodyProjects>
             <SectionProjects >
                 {props.data ?                
-                Three(props.data, props.all).map((e, index)=>(
-                        <DivSect key={index}>
-                            <h2 id='title'>ROUANET</h2>
-                            <h2 id='name'> {e.nome} </h2>
-                            <p id='city'> {e.municipio}, {e.UF}</p>
-                            <p id='resum'> {e.resumo} </p> 
-                            <p id='okay'>APROVADO: <strong>{e.valor_aprovado}</strong></p>
-                            <p id='captade'>CAPTADO: <strong>{e.valor_captado}</strong></p>                           
-                            <div>
-                                <ButtonStorage favorito={e.favorito} > ADICIONAR  </ButtonStorage>
-                                <AiOutlineHeart id='icon' favorito={e.favorito} />    
-                            </div>
-                        </DivSect>                       
+                Three(data, props.all).map((e, index)=>(
+                    <DivSect key={index}>
+                        <h2 id='title'>ROUANET</h2>
+                        <h2 id='name'> {e.nome} </h2>
+                        <p id='city'> {e.municipio}, {e.UF}</p>
+                        <p id='resum'> {e.resumo} </p> 
+                        <p id='okay'>APROVADO: <strong>{e.valor_aprovado}</strong></p>
+                        <p id='captade'>CAPTADO: <strong>{e.valor_captado}</strong></p>                           
+                        <div>
+                            <ButtonStorage  favorito={e.favorito} onClick={(()=>AddFavorits(e, index))}> ADICIONAR  </ButtonStorage>
+                            <AiOutlineHeart id='icon' favorito={e.favorito} />    
+                        </div>
+                    </DivSect>                       
                 )) : <div> Carregando ... </div>}
             </SectionProjects>
         </BodyProjects>
