@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import Projects from './components/projects/Projects';
+import {MdKeyboardArrowRight} from 'react-icons/md'
 
 function App() {
   const [data, setData] = useState();
@@ -41,11 +42,17 @@ function App() {
   return (
     <BodyApp>
       <h1>Ver todos projetos</h1>
-      <Projects data={data} all={all}/>        
-        <div id="divbutton" >
-            <ButtonAll id="all" onClick={(()=>FuncAll())}> {all === 100 ? 'VER MENOS' : 'VER TODOS'} </ButtonAll>
-            <button id="more" onClick={(()=>MoreThree())}>VER MAIS PROJETOS </button>
-        </div>   
+
+      <Projects data={data} all={all}/>  
+
+      <Circle onClick={(()=>MoreThree())}>
+        <MdKeyboardArrowRight id="arrow" onClick={(()=>MoreThree())}/>
+      </Circle> 
+
+      <div id="divbutton" >
+        <ButtonAll id="all" onClick={(()=>FuncAll())}> {all === 100 ? 'VER MENOS' : 'VER TODOS'} </ButtonAll>
+      </div>   
+
     </BodyApp>
   );
 }
@@ -76,7 +83,7 @@ margin: 100px auto;
 
   #divbutton {
     display: flex;
-    justify-content: space-around;;
+    justify-content: end;
     width: 100%;
 
     #more {
@@ -97,9 +104,29 @@ margin: 100px auto;
       height: 35px;
       margin-top: auto;
     }
-  }
-    
+  }   
 `
+
+const Circle = styled.div`
+width: 30px;
+position: absolute;
+right: 80px;
+height: 30px;
+top: 475px;
+border: solid #80808087;
+border-radius: 80px;
+
+
+  #arrow {
+    position: relative;
+    top: -11px;
+    right: 10px;
+    font-size: 50px;
+    color: #80808087;
+  }
+
+`
+
 
 const ButtonAll = styled.button`
 text-align: center;
@@ -110,3 +137,4 @@ margin-right: 10px;
 margin-top: 65px;
 cursor: pointer;
 `
+

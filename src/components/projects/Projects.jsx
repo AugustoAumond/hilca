@@ -3,38 +3,16 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import {AiOutlineHeart} from 'react-icons/ai';
+import { Three } from './Projects.action';
 
 function Projects (props){
     let data = props.data;
 
-    function Three (data, all){
-        let ctr = all;
-        let list = [];
-        if (ctr === 3){
-            for (let i = 0; i < ctr; i++){
-                list.push(data[i]);
-            }
-            return list;
-        }
-
-        if (ctr > 3 && ctr < 100){
-            for (let i = ctr - 3; i < ctr; i++){
-                list.push(data[i]);
-            }
-            console.log(list)
-            return list;
-        }
-
-        if (ctr === 100){
-            list = data;
-        }
-        return list;
-    }
 
     return (
         <BodyProjects>
             <SectionProjects >
-                {Three(props.data, props.all) ?                
+                {props.data ?                
                Three(props.data, props.all).map((e, index)=>(
                         <DivSect key={index}>
                             <h2 id='title'>ROUANET</h2>
