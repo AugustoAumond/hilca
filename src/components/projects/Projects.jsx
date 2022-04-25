@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import {AiOutlineHeart} from 'react-icons/ai';
 import { Three } from './Projects.action';
+import App from './../../App';
 
 function Projects (props){
     let data = props.data;
@@ -29,10 +30,10 @@ function Projects (props){
                 value.favorito = true;
                 favorits.push(value);
                 data[value.id].favorito = true;
-                localStorage.setItem('favorits', JSON.stringify(favorits)); 
-                
+                localStorage.setItem('favorits', JSON.stringify(favorits));   
             }
         }
+        <App all={value.id} />
     }
 
     return (
@@ -48,7 +49,7 @@ function Projects (props){
                         <p id='okay'>APROVADO: <strong>{e.valor_aprovado}</strong></p>
                         <p id='captade'>CAPTADO: <strong>{e.valor_captado}</strong></p>                           
                         <div>
-                            <ButtonStorage  favorito={e.favorito} onClick={(()=>AddFavorits(e, index))}> ADICIONAR  </ButtonStorage>
+                            <ButtonStorage  favorito={data[e.id].favorito} onClick={(()=>AddFavorits(e, index))}> ADICIONAR  </ButtonStorage>
                             <AiOutlineHeart id='icon' favorito={e.favorito} />    
                         </div>
                     </DivSect>                       

@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import Projects from './components/projects/Projects';
-import {MdKeyboardArrowRight} from 'react-icons/md'
+import {MdKeyboardArrowRight, MdKeyboardArrowLeft} from 'react-icons/md'
 
-function App() {
+function App(props) {
   const [data, setData] = useState();
   const [all, setAll] = useState(3);
 
@@ -36,7 +36,21 @@ function App() {
     function MoreThree(){
       if (all < 100){ 
         setAll(all + 3)
-      }  
+      } 
+      
+      if (all > 3){
+        document.querySelector('#circleleft').style.display = 'block';
+      }
+    }
+
+    function LessThree(){
+      if (all > 3){
+        setAll(all -3);
+      }
+
+      if (all === 3){
+        document.querySelector('#circleleft').style.display = 'none';
+      }
     }
 
 
@@ -46,9 +60,13 @@ function App() {
 
       <Projects data={data} all={all}/>  
 
-      <Circle id='circle' onClick={(()=>MoreThree())}>
+      <CircleLeft id='circleleft' onClick={(()=>LessThree())}>
+        <MdKeyboardArrowLeft id="arrow" onClick={(()=>LessThree())}/>
+      </CircleLeft> 
+
+      <CircleRight id='circleright' onClick={(()=>MoreThree())}>
         <MdKeyboardArrowRight id="arrow" onClick={(()=>MoreThree())}/>
-      </Circle> 
+      </CircleRight> 
 
       <div id="divbutton" >
         <ButtonAll id="all" onClick={(()=>FuncAll())}> {all === 100 ? 'VER MENOS' : 'VER TODOS'} </ButtonAll>
@@ -94,13 +112,13 @@ margin: 100px auto;
     }
   } 
   
-  #circle: hover {
+  #circleright: hover {
     color: gray;
   }
 
 `
 
-const Circle = styled.div`
+const CircleRight = styled.div`
 width: 40px;
 position: absolute;
 right: 40px;
@@ -122,6 +140,30 @@ border-radius: 80px;
     color: gray;
   }
 
+`
+
+const CircleLeft = styled.div`
+display: none;
+width: 40px;
+position: absolute;
+left: 40px;
+height: 40px;
+top: 475px;
+border: solid #80808087;
+border-radius: 80px;
+
+  #arrow {
+    position: relative;
+    top: -6px;
+    right: 7px;
+    font-size: 50px;
+    color: #80808087;
+    cursor: pointer;
+  }
+
+  #arrow: hover {
+    color: gray;
+  }
 `
 
 
