@@ -1,11 +1,18 @@
+import{useEffect, useState} from 'react';
+
 import styled from 'styled-components';
 
 import {AiOutlineHeart} from 'react-icons/ai';
 import { Three } from './Projects.action';
-import App from './../../App';
 
 function Projects (props){
+    const [change, setChange] = useState();
+
     let data = props.data;
+
+    useEffect (()=>{
+
+    }, [change])
 
     function AddFavorits (value, index){
         let favorits = JSON.parse(localStorage.getItem('favorits'));
@@ -33,7 +40,7 @@ function Projects (props){
                 localStorage.setItem('favorits', JSON.stringify(favorits));   
             }
         }
-        <App all={value.id} />
+        setChange(favorits.length);
     }
 
     return (
@@ -49,8 +56,10 @@ function Projects (props){
                         <p id='okay'>APROVADO: <strong>{e.valor_aprovado}</strong></p>
                         <p id='captade'>CAPTADO: <strong>{e.valor_captado}</strong></p>                           
                         <div>
-                            <ButtonStorage  favorito={data[e.id].favorito} onClick={(()=>AddFavorits(e, index))}> ADICIONAR  </ButtonStorage>
-                            <AiOutlineHeart id='icon' favorito={e.favorito} />    
+                            <ButtonStorage  favorito={data[e.id].favorito} onClick={(()=>AddFavorits(e, index))}> ADICIONAR  
+                                <AiOutlineHeart id='icon' favorito={data[e.id].favorito} />   
+                            </ButtonStorage>
+                             
                         </div>
                     </DivSect>                       
                 )) : <div> Carregando ... </div>}
@@ -114,11 +123,11 @@ margin-top: 70px;
     }
 
     #icon {
-        top: -3px;
+        top: 0px;
         font-size: 25px;
         position: relative;
-        right: -3px;
-        color: #80808080;
+        right: -85px;
+        color: ${props => props.favorito === true ? 'black' : '#80808080'};
     }
 
 
@@ -132,8 +141,8 @@ const ButtonStorage = styled.button`
 background: ${props => props.favorito === true ? 'red' : 'white'};
 font-size: 22px;
 border: white;
-width: 260px;
+width: 100%;
 padding: 15px;
-color: #80808080;
+color: ${props => props.favorito === true ? 'black' : '#80808080'};
 cursor: pointer;
 `

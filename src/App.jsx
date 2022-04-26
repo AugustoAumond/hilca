@@ -8,7 +8,6 @@ import {MdKeyboardArrowRight, MdKeyboardArrowLeft} from 'react-icons/md'
 function App(props) {
   const [data, setData] = useState();
   const [all, setAll] = useState(3);
-
   
     useEffect (() => {
       axios.get(`http://api.salic.cultura.gov.br/v1/projetos/?limit=100&format=json`)
