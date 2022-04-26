@@ -6,14 +6,17 @@ import {AiOutlineHeart} from 'react-icons/ai';
 import { Three } from './Projects.action';
 
 function Projects (props){
+    // Atualizar tela
     const [change, setChange] = useState();
 
     let data = props.data;
 
+    //Atualizar tela
     useEffect (()=>{
 
     }, [change])
 
+    // Adicionar favoritos ao localStorage e mudar variável que atualiza o botão e a tela;
     function AddFavorits (value, index){
         let favorits = JSON.parse(localStorage.getItem('favorits'));
         console.log(data)

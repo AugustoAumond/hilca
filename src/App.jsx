@@ -5,10 +5,11 @@ import styled from "styled-components";
 import Projects from './components/projects/Projects';
 import {MdKeyboardArrowRight, MdKeyboardArrowLeft} from 'react-icons/md'
 
-function App(props) {
+function App() {
   const [data, setData] = useState();
   const [all, setAll] = useState(3);
   
+    // Consumir a Api e guardar os dados no data;
     useEffect (() => {
       axios.get(`http://api.salic.cultura.gov.br/v1/projetos/?limit=100&format=json`)
       .then((e) => {
@@ -26,12 +27,14 @@ function App(props) {
       })
     }, [])
 
+    // Mostrar todos projetos na tela;
     function FuncAll(){
       if (all === 100){
         setAll(3);
       } else (setAll(100))
     }
 
+    // Mostrar os próximos três projetos e abrir botão de voltar três projetos;
     function MoreThree(){
       if (all < 100){ 
         setAll(all + 3)
@@ -42,6 +45,7 @@ function App(props) {
       }
     }
 
+    // Mostrar os três projetos anteriores e fechar botão de voltar;
     function LessThree(){
       if (all > 3){
         setAll(all -3);

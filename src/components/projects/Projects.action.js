@@ -1,17 +1,5 @@
 
-
-export function AddStorage(value){
-    let historic =  JSON.parse(localStorage.getItem('historic')) ? JSON.parse(localStorage.getItem('historic')) : value ;
-
-    console.log(historic)
-
-    if (historic === undefined){
-        historic.push(value);
-        JSON.parse(localStorage.setItem('historic', historic));
-        console.log(historic);
-    }
-}
-
+// Mostrar apenas três itens na tela ou todos;
 export function Three (data, all){
     let ctr = all;
     let list = [];
