@@ -19,9 +19,6 @@ function Projects (props){
     // Adicionar favoritos ao localStorage e mudar variável que atualiza o botão e a tela;
     function AddFavorits (value, index){
         let favorits = JSON.parse(localStorage.getItem('favorits'));
-        console.log(data)
-        console.log(favorits, value);
-
         if (favorits === null){
             favorits = value;
             favorits.favorito = true;
@@ -53,11 +50,11 @@ function Projects (props){
                 Three(data, props.all).map((e, index)=>(
                     <DivSect key={index}>
                         <h2 id='title'>ROUANET</h2>
-                        <h2 id='name'> {e.nome} </h2>
-                        <p id='city'> {e.municipio}, {e.UF}</p>
-                        <p id='resum'> {e.resumo} </p> 
-                        <p id='okay'>APROVADO: <strong>{e.valor_aprovado}</strong></p>
-                        <p id='captade'>CAPTADO: <strong>{e.valor_captado}</strong></p>                           
+                        <h2 id='name'> {e.nome ?? e.nome} </h2>
+                        <p id='city'> {e.municipio??e.municipio}, {e.UF??e.UF}</p>
+                        <p id='resum'> {e.resumo??e.resumo} </p> 
+                        <p id='okay'>APROVADO: <strong>{e.valor_aprovado??e.valor_aprovado}</strong></p>
+                        <p id='captade'>CAPTADO: <strong>{e.valor_captado??e.valor_captado}</strong></p>                           
                         <div>
                             <ButtonStorage  favorito={data[e.id].favorito} onClick={(()=>AddFavorits(e, index))}> ADICIONAR  
                                 <AiOutlineHeart id='icon' favorito={data[e.id].favorito} />   
@@ -80,7 +77,6 @@ display: grid;
 grid-template-columns: repeat(3, 1fr);
 max-width: 1200px;
 margin: 0 auto;
-grid-gap: 20px;
 
 
     @media (max-width: 1250px){
@@ -95,9 +91,11 @@ grid-gap: 20px;
 `
 
 const DivSect = styled.div `
-width: 33%;
+position: relative;
+left: 15px;
+width: 30%;
 margin: 15px;
-min-width: 350px;
+min-width: 300px;
 flex-wrap: wrap;
 margin-top: 70px;
 
